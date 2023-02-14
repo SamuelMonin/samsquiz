@@ -45,7 +45,7 @@ function Couleur(list, userResponseIndex, index, isUserResponsePending, checked)
         return "white"
     }
 
-    if (list[index].responseJuste === userResponseIndex) {
+    if (list[index].correctAnswer === userResponseIndex) {
         return "#4caf50"
     }
     else {

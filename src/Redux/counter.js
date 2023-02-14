@@ -33,12 +33,12 @@ function parser (data) {
 const ChangementBis = (results) => {
    const newList = results.map((elemOfResults) => {
       const neweElemOfResults = {}
-      const responseJuste = randInt()
-      neweElemOfResults.responseJuste = responseJuste
+      const correctAnswer = randInt()
+      neweElemOfResults.correctAnswer = correctAnswer
       const responseCorrecte = elemOfResults.correct_answer
-      const responseFausse = elemOfResults.incorrect_answers
-      responseFausse.splice(responseJuste, 0, responseCorrecte)
-      neweElemOfResults.responses = responseFausse
+      const incorrectAnswers = elemOfResults.incorrect_answers
+      incorrectAnswers.splice(correctAnswer, 0, responseCorrecte)
+      neweElemOfResults.responses = incorrectAnswers
       neweElemOfResults.question = elemOfResults.question
       return neweElemOfResults
    })
@@ -78,7 +78,7 @@ export const counterSlice = createSlice({
          }
          state.userResponseIndex = action.payload
          state.isUserResponsePending = false
-         if (state.list[state.index].responseJuste === state.userResponseIndex) {
+         if (state.list[state.index].correctAnswer === state.userResponseIndex) {
             state.score += 1
          }
       },
