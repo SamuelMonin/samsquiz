@@ -9,11 +9,11 @@ export function Response () {
     const isUserResponsePending = useSelector((state) => state.counter.isUserResponsePending)
     const responseJuste = list[index].responseJuste
 
-    if (isUserResponsePending == true) {
+    if (isUserResponsePending === true) {
         return null
     }
 
-    if (list[index].responseJuste == userResponseIndex) {
+    if (list[index].responseJuste === userResponseIndex) {
         return (
             <div>
             <p>Good answer, well done !</p>

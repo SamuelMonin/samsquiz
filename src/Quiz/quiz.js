@@ -16,23 +16,23 @@ export function Quiz() {
     const index = useSelector((state) => state.counter.index)
     React.useEffect(() => {
         dispatch(fetchQuestions())
-    }, [])
+    }, [dispatch])
     return (
         <div>
             <Header />
-            {(index == -1) && <Home />}
+            {(index === -1) && <Home />}
             <Stack
                 justifyContent="center"
                 alignItems="center">
-                {(index != -1 && index != 10) && <Affiche />}
+                {(index !== -1 && index !== 10) && <Affiche />}
                 <Stack
                     direction="column"
                     justifyContent="space-between"
                     alignItems="center"
                     spacing={3}
                 >
-                    {(index != -1 && index != 10) && <Choix />}
-                    {(index != -1 && index != 10) && <Response />}
+                    {(index !== -1 && index !== 10) && <Choix />}
+                    {(index !== -1 && index !== 10) && <Response />}
                 </Stack>
             </Stack>
             <Stack
@@ -41,8 +41,8 @@ export function Quiz() {
                 alignItems="center"
                 spacing={2}
             >
-                {(index != -1 && index != 10) && <Suivant />}
-                {(index != -1 && index != 10) && <Score />}
+                {(index !== -1 && index !== 10) && <Suivant />}
+                {(index !== -1 && index !== 10) && <Score />}
             </Stack>
             {(index === 10) && <Fin />}
         </div>

@@ -78,7 +78,7 @@ export const counterSlice = createSlice({
          }
          state.userResponseIndex = action.payload
          state.isUserResponsePending = false
-         if (state.list[state.index].responseJuste == state.userResponseIndex) {
+         if (state.list[state.index].responseJuste === state.userResponseIndex) {
             state.score += 1
          }
       },

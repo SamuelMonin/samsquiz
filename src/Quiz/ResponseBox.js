@@ -41,11 +41,11 @@ export function ResponseBox(props) {
 
 
 function Couleur(list, userResponseIndex, index, isUserResponsePending, checked) {
-    if (isUserResponsePending == true || userResponseIndex !== checked) {
+    if (isUserResponsePending === true || userResponseIndex !== checked) {
         return "white"
     }
 
-    if (list[index].responseJuste == userResponseIndex) {
+    if (list[index].responseJuste === userResponseIndex) {
         return "#4caf50"
     }
     else {
