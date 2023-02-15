@@ -1,8 +1,8 @@
 import React from "react";
-import { Quiz } from "./Quiz/quiz";
+import Quiz from "./Quiz/Quiz";
 
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">

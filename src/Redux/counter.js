@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-function randInt(maxInt=4) {
+const RandInt = (maxInt=4) => {
    const randomNumber = Math.floor((Math.random() * maxInt));
    return randomNumber
 }
 
-function parser (data) {
+const DecodeAsStringFromBase64 = (data) => {
    const results = data.results
    const transfo = results.map((element) => {
       const category = atob(element.category)
@@ -30,10 +30,10 @@ function parser (data) {
    return transfo
 }
 
-const ChangementBis = (results) => {
+const CreateQuestionList = (results) => { // CreateQuestionList
    const newList = results.map((elemOfResults) => {
       const neweElemOfResults = {}
-      const correctAnswer = randInt()
+      const correctAnswer = RandInt()
       neweElemOfResults.correctAnswer = correctAnswer
       const responseCorrecte = elemOfResults.correct_answer
       const incorrectAnswers = elemOfResults.incorrect_answers
@@ -42,12 +42,14 @@ const ChangementBis = (results) => {
       neweElemOfResults.question = elemOfResults.question
       return neweElemOfResults
    })
+   console.log("newList : ", newList)
    return newList
 }
 
 
 
-export const fetchQuestions = createAsyncThunk( // Rename fetchQuestions
+export const fetchQuestions = createAsyncThunk(
+
    'users/fetchByIdStatus',
    async () => {
       const response = await fetch("https://opentdb.com/api.php?amount=10&type=multiple&encode=base64").then((resp) => resp.json())
@@ -58,17 +60,17 @@ export const fetchQuestions = createAsyncThunk( // Rename fetchQuestions
 export const counterSlice = createSlice({
    name: "counter",
    initialState: {
-      index: -1,
+      questionIndex: -1,
       userResponseIndex: -1,
       isUserResponsePending: true,
       score: 0,
    },
    reducers: {
       startQuiz: (state) => { 
-         state.index = 0
+         state.questionIndex = 0
       },
       moveToNextQuestion: (state, action) => {
-         state.index += 1
+         state.questionIndex += 1
          state.isUserResponsePending = true
          state.userResponseIndex = action.payload
       },
@@ -78,7 +80,7 @@ export const counterSlice = createSlice({
          }
          state.userResponseIndex = action.payload
          state.isUserResponsePending = false
-         if (state.list[state.index].correctAnswer === state.userResponseIndex) {
+         if (state.list[state.questionIndex].correctAnswer === state.userResponseIndex) {
             state.score += 1
          }
       },
@@ -86,10 +88,10 @@ export const counterSlice = createSlice({
    extraReducers: (builder) => {
       builder
          .addCase(fetchQuestions.fulfilled, (state, action) => {
-            const coucou = parser(action.payload)
-            state.list = ChangementBis(coucou)
+            const DecodeList = DecodeAsStringFromBase64(action.payload)
+            state.list = CreateQuestionList(DecodeList)
             state.count = 0
-            state.index = -1
+            state.questionIndex = -1
             state.userResponseIndex = -1
             state.isUserResponsePending = true
             state.score = 0

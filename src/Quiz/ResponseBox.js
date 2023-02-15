@@ -5,19 +5,33 @@ import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
 
 
+const Color = (list, userResponseIndex, questionIndex, isUserResponsePending, checked) => {
+    if (isUserResponsePending === true || userResponseIndex !== checked) {
+        return "white"
+    }
 
-export function ResponseBox(props) {
+    if (list[questionIndex].correctAnswer === userResponseIndex) {
+        return "#4caf50"
+    }
+    else {
+        return "#f44336"
+    }
+}
+
+
+const ResponseBox = (props) => {
     const dispatch = useDispatch()
-    const index = useSelector((state) => state.counter.index)
+    const questionIndex = useSelector((state) => state.counter.questionIndex)
     const list = useSelector((state) => state.counter.list)
     const userResponseIndex = useSelector((state) => state.counter.userResponseIndex)
     const isUserResponsePending = useSelector((state) => state.counter.isUserResponsePending)
+    
     return (
         <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}
             style={{
                 border: "2px solid black", width: "90%", margin: "15px",
                 borderRadius: "5px",
-                backgroundColor: Couleur(list, userResponseIndex, index, isUserResponsePending, props.response),
+                backgroundColor: Color(list, userResponseIndex, questionIndex, isUserResponsePending, props.response),
                 cursor: "pointer"
             }}
             onClick={() => {
@@ -25,7 +39,7 @@ export function ResponseBox(props) {
             }}
         >
             <p style={{ paddingLeft: "80px" }}>
-                {list[index].responses[props.response]}
+                {list[questionIndex].responses[props.response]}
             </p>
             <Checkbox checked={userResponseIndex === props.response}
                 sx={{
@@ -40,15 +54,4 @@ export function ResponseBox(props) {
 }
 
 
-function Couleur(list, userResponseIndex, index, isUserResponsePending, checked) {
-    if (isUserResponsePending === true || userResponseIndex !== checked) {
-        return "white"
-    }
-
-    if (list[index].correctAnswer === userResponseIndex) {
-        return "#4caf50"
-    }
-    else {
-        return "#f44336"
-    }
-}
+export default ResponseBox

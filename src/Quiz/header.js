@@ -1,7 +1,8 @@
 import React from "react";
 import Box from '@mui/material/Box';
 
-export function Header() {
+const Header = () => {
+    
     return (
         <Box
             sx={{
@@ -16,3 +17,5 @@ export function Header() {
         </Box>
     )
 }
+
+export default Header

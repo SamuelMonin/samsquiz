@@ -3,14 +3,13 @@ import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 
 
-export function Affiche() {
-    const index = useSelector((state) => state.counter.index)
-
+const QuestionNumber = () => {
+    const questionIndex = useSelector((state) => state.counter.questionIndex)
 
     return (
         <div>
             <p>
-                Question {index + 1}/10
+                Question {questionIndex + 1}/10
             </p>
             <Stack
                 direction="column"
@@ -22,3 +21,5 @@ export function Affiche() {
         </div>
     )
 }
+
+export default QuestionNumber

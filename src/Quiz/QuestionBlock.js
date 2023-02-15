@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import { Paper } from "@mui/material";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { ResponseBox } from "./ResponseBox";
+import ResponseBox from "./ResponseBox";
 
 
 
-export function Choix() {
-    const index = useSelector((state) => state.counter.index)
+const QuestionBlock = () => {
+    const questionIndex = useSelector((state) => state.counter.questionIndex)
     const list = useSelector((state) => state.counter.list)
 
     return (
@@ -29,20 +29,22 @@ export function Choix() {
                 >
                     <HelpOutlineIcon style={{ color: "white" }} />
                     <p style={{ color: "white" }}>
-                        {list[index].question}
+                        {list[questionIndex].question}
                     </p>
                 </Stack>
                 <Stack
                     alignItems={"center"}
                     justifyContent={"space-evenly"}
-                    style={{ width: "100%", flex: 1}}
+                    style={{ width: "100%", flex: 1 }}
                 >
-                    <ResponseBox  response={0}/>
-                    <ResponseBox  response={1}/>
-                    <ResponseBox  response={2}/>
-                    <ResponseBox  response={3}/>
+                    <ResponseBox response={0} />
+                    <ResponseBox response={1} />
+                    <ResponseBox response={2} />
+                    <ResponseBox response={3} />
                 </Stack>
             </Stack>
         </Paper>
     )
 }
+
+export default QuestionBlock

@@ -1,38 +1,39 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Choix } from "../Quiz/choix";
-import { Response } from "./response";
-import { Affiche } from "./afficher";
-import { Fin } from "./fin";
+import QuestionBlock from "./QuestionBlock";
+import Response from "./Response";
+import QuestionNumber from "./QuestionNumber";
+import End from "./End";
 import { fetchQuestions } from "../Redux/counter"
-import { Header } from "./header";
-import { Home } from "./home";
-import { Score } from "./score";
+import Header from "./Header";
+import Home from "./Home";
+import Score from "./Score";
 import { Stack } from "@mui/material";
-import { Suivant } from "./suivant";
+import Next from "./Next";
 
-export function Quiz() {
+const Quiz = () => {
     const dispatch = useDispatch()
-    const index = useSelector((state) => state.counter.index)
+    const questionIndex = useSelector((state) => state.counter.questionIndex)
     React.useEffect(() => {
         dispatch(fetchQuestions())
     }, [dispatch])
+    
     return (
         <div>
             <Header />
-            {(index === -1) && <Home />}
+            {(questionIndex === -1) && <Home />}
             <Stack
                 justifyContent="center"
                 alignItems="center">
-                {(index !== -1 && index !== 10) && <Affiche />}
+                {(questionIndex !== -1 && questionIndex !== 10) && <QuestionNumber />}
                 <Stack
                     direction="column"
                     justifyContent="space-between"
                     alignItems="center"
                     spacing={3}
                 >
-                    {(index !== -1 && index !== 10) && <Choix />}
-                    {(index !== -1 && index !== 10) && <Response />}
+                    {(questionIndex !== -1 && questionIndex !== 10) && <QuestionBlock />}
+                    {(questionIndex !== -1 && questionIndex !== 10) && <Response />}
                 </Stack>
             </Stack>
             <Stack
@@ -41,10 +42,12 @@ export function Quiz() {
                 alignItems="center"
                 spacing={2}
             >
-                {(index !== -1 && index !== 10) && <Suivant />}
-                {(index !== -1 && index !== 10) && <Score />}
+                {(questionIndex !== -1 && questionIndex !== 10) && <Next />}
+                {(questionIndex !== -1 && questionIndex !== 10) && <Score />}
             </Stack>
-            {(index === 10) && <Fin />}
+            {(questionIndex === 10) && <End />}
         </div>
     )
 }
+
+export default Quiz

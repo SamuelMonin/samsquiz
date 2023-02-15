@@ -2,12 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 
-export function Score () {
+const Score = () => {
     const score = useSelector((state) => state.counter.score)
-    const index = useSelector((state) => state.counter.index)
+    const questionIndex = useSelector((state) => state.counter.questionIndex)
+
     return (
         <Stack>
-            <p>Your current score : {score}/{index + 1}</p>
+            <p>Your current score : {score}/{questionIndex + 1}</p>
         </Stack>
     )
 }
+
+export default Score

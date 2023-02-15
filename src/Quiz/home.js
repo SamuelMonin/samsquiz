@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 import { startQuiz } from "../Redux/counter";
 
 
-export function Home() {
+const Home = () => {
     const dispatch = useDispatch()
     const consigne = "This is a general knowledge quiz in 10 questions. Good luck and enjoy !"
+    
     return (
         <div>
             <Stack
@@ -32,3 +33,5 @@ export function Home() {
         </div>
     )
 }
+
+export default Home
